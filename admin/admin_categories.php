@@ -1,4 +1,3 @@
-<?php ob_start(); ?>
 <?php include "includes/admin_header.php"; ?>
 
 <body>
@@ -24,22 +23,7 @@
                         
                         <div class="col-xs-6">
                            
-                           <?php
-                            if(isset($_POST['submit'])){
-                                $cat_title = $_POST['cat_title'];
-                                
-                                if($cat_title == "" || empty($cat_title)){
-                                    echo "This field should not be empty";
-                                } else {
-                                    $query = "INSERT INTO categories(cat_id, cat_title) ";
-                                    $query .= "VALUEs(NULL,'{$cat_title}') ";
-                                    
-                                    $create_category_query = mysqli_query($connection, $query);
-                                } if(!$create_category_query) {
-                                    die('QUERY FAILED' . mysqli_error($connection));
-                                }
-                            }
-                            ?>
+                           <?php echo insert_categories(); ?>
                            
                             <form action="" method="post">
                                 <div class="form-group">
@@ -51,7 +35,7 @@
                                 </div>
                             </form>
                             
-                            <?php
+                            <?php // UPDATE AND INCLUDE QUERY
                             
                             if(isset($_GET['edit'])){
                                 $cat_id = $_GET['edit'];
@@ -60,7 +44,6 @@
                             }
                             
                             ?>
-                            
                         </div>
                         
                         <!--Add Category Form-->
@@ -74,45 +57,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   <?php 
+                                   <?php findAllCategories(); ?>
                                     
-                                    // FIND ALL CATEGORIES QUERY
-                                    
-                                    $query = "SELECT * FROM categories";
-                                    $select_categories = mysqli_query($connection,$query);
-                                    while($row = mysqli_fetch_assoc($select_categories)) {
-                                        $cat_id = $row['cat_id'];
-                                        $cat_title = $row['cat_title'];
-                                        
-                                        echo "<tr>";
-
-                                        echo "<td>{$cat_id}</td>";
-                                        echo "<td>{$cat_title}</td>";
-                                        echo "<td><a href='admin_categories.php?delete={$cat_id}'>Delete</a> <a href='admin_categories.php?edit={$cat_id}'>Edit</a></td>";
-                                        
-                                        echo "</tr>";
-                                    } ?>
-                                    
-                                    <?php
-                                    
-                                    // DELETE QUERY
-                                    
-                                    if (isset($_GET['delete'])){
-                                        $the_cat_id = $_GET['delete'];
-                                        
-                                        $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
-                                        $delete_query = mysqli_query($connection,$query);
-                                        header("Location: admin_categories.php");
-                                        
-                                    }
-                                    
-                                    ?>
+                                    <?php deleteCategories(); ?>
                                 </tbody>
                             </table>
                         </div>
-                        
-                        
-                        
                     </div>
                 </div>
                 <!-- /.row -->
