@@ -34,7 +34,7 @@ function findAllCategories() {
 
             echo "<td>{$cat_id}</td>";
             echo "<td>{$cat_title}</td>";
-            echo "<td><a href='admin_categories.php?delete={$cat_id}'>Delete</a> <a href='admin_categories.php?edit={$cat_id}'>Edit</a></td>";
+            echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a> <a href='categories.php?edit={$cat_id}'>Edit</a></td>";
 
             echo "</tr>";
         }
@@ -50,7 +50,7 @@ function deleteCategories() {
 
         $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
         $delete_query = mysqli_query($connection,$query);
-        header("Location: admin_categories.php");
+        header("Location: categories.php");
 
     }
 }

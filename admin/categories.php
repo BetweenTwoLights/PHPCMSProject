@@ -48,7 +48,7 @@
                         
                         <!--Add Category Form-->
                         <div class="col-xs-6">                                
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>ID</th>

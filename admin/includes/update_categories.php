@@ -27,7 +27,7 @@
                                             die("QUERY FAILED" . mysqli_error($connection));
                                         }
                                         
-                                        header("Location: admin_categories.php");
+                                        header("Location: categories.php");
                                         
                                     }
                                     
